@@ -1,6 +1,6 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-import fetch from "node-fetch"
+const fetch=require('node-fetch')
 const pretty = require('pretty')
 
 const atcoderBaseUrl="https://atcoder.jp/users/"
