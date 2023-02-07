@@ -9,7 +9,6 @@ const ratingRouter=require('./router/ratingRouter')
 app.use('/schedule', scheduleRouter)
 app.use('/ranking',ratingRouter)
 
-const PORT=3000
-app.listen(PORT, () => {
-    console.log("Server is Runnig on Port : ",PORT);
+app.listen(3000, () => {
+    console.log("Server is Runnig on Port : ",3000);
 })
