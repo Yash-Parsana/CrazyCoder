@@ -62,7 +62,6 @@ const atCoderSchedule = async (req, res) => {
 
 const codechefSchedule = async (req, res) => {
     
-    
     const response=await fetch(codeChefUrl,{method: 'GET'})
     const jsonArray = []
     if (response.ok)
@@ -98,6 +97,7 @@ const codechefSchedule = async (req, res) => {
             for (let i = 0; i < futureContest.length; i++)
             {
                 const curr =futureContest[i]
+                // console.log("Time : ", curr.contest_start_date);
                 const obj = {
                     name: curr.contest_name,
                     start_time:Date.parse(curr.contest_start_date),
