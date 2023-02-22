@@ -52,7 +52,7 @@ const atCoderSchedule = async (req, res) => {
                 name: name,
                 start_time: Stime,
                 end_time: Etime,
-                staus:status
+                status:status
             }
             jsonArray.push(obj);
         }
