@@ -144,7 +144,7 @@ const leetCodeRating = async (req, res) => {
         const solved=pretty(pr.html())
         res.status(200).json({
             status: "success",
-            rating:solved
+            totalSolved:solved
         })
     }
     catch (err)
