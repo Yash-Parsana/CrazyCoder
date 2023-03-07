@@ -85,15 +85,15 @@ const codechefSchedule = async (req, res) => {
                 
                 if (curr.contest_code != "GAMES")
                 {
-                    const contestStartISODate = curr.contest_start_date_iso;
-                    const contestEndISODate = curr.contest_end_date_iso;
-                    const contestStart = new Date(contestStartISODate);
-                    const contestEnd = new Date(contestEndISODate);
-                    const contestStartUTC = new Date(contestStart.getTime() + contestStart.getTimezoneOffset() * 60 * 1000);
-                    const contestEndUTC = new Date(contestEnd.getTime() + contestEnd.getTimezoneOffset() * 60 * 1000);
+                    // const contestStartISODate = curr.contest_start_date_iso;
+                    // const contestEndISODate = curr.contest_end_date_iso;
+                    // const contestStart = new Date(contestStartISODate);
+                    // const contestEnd = new Date(contestEndISODate);
+                    const contestStartUTC = Date.parse(curr.contest_start_date_iso);
+                    const contestEndUTC = Date.parse(curr.contest_end_date_iso)
 
                     // contestStartUTC will be a JavaScript Date object representing the contest start time in UTC timezone
-
+                    //new Date(contestStart.getTime() + contestStart.getTimezoneOffset() * 60 * 1000)
                     const obj = {
                         name: curr.contest_name,
                         start_time:contestStartUTC,
@@ -106,16 +106,11 @@ const codechefSchedule = async (req, res) => {
             for (let i = 0; i < futureContest.length; i++)
             {
                 const curr =futureContest[i]
-                // console.log("Time : ", curr.contest_start_date);
-                const contestStartISODate = curr.contest_start_date_iso;
-                const contestEndISODate = curr.contest_end_date_iso;
-                const contestStart = new Date(contestStartISODate);
-                const contestEnd = new Date(contestEndISODate);
-                console.log(Date.parse(contestStartISODate), " - ",Date.parse(new Date(curr.contest_start_date_iso).toLocaleString("en-US", {timeZone: "UTC"})));
+
                 const obj = {
                     name: curr.contest_name,
-                    start_time:Date.parse(new Date(curr.contest_start_date_iso).toLocaleString("en-US", {timeZone: "UTC"})),
-                    end_time: new Date(contestEnd.getTime() + contestEnd.getTimezoneOffset() * 60 * 1000),
+                    start_time:Date.parse(curr.contest_start_date_iso),
+                    end_time: Date.parse(curr.contest_end_date_iso),
                     status:"upcoming"
                 }
                 jsonArray.push(obj)
