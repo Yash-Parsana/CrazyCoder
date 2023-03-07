@@ -232,71 +232,71 @@ const hackerEarthSchedule = async (req, res) => {
     res.status(200).send(jsonArray)
 }
 
-const kickStartSchedule = async (req, res) => {
+// const kickStartSchedule = async (req, res) => {
     
-    //using puppeteer
-    const browser = await puppeteer.launch({});
-    const page = await browser.newPage();
-    await page.goto(kickStartUrl);
+//     //using puppeteer
+//     const browser = await puppeteer.launch({});
+//     const page = await browser.newPage();
+//     await page.goto(kickStartUrl);
   
-    await page.waitForSelector('.schedule-row__upcoming');
+//     await page.waitForSelector('.schedule-row__upcoming');
 
-    const htmlpage = await page.evaluate(() => document.body.innerHTML);
+//     const htmlpage = await page.evaluate(() => document.body.innerHTML);
 
-    // console.log(htmlpage);
-    const $=cheerio.load(htmlpage)
+//     // console.log(htmlpage);
+//     const $=cheerio.load(htmlpage)
     
-    const contests = $(".schedule-row__upcoming")
-    const jsonArray=[]
-    contests.each((idx, ele) => {
-        const curr = cheerio.load(ele)
-        const name = pretty(curr("div:nth-child(1) span").html())
-        const start_time = Date.parse(pretty(curr("div:nth-child(2) span").html()))
-        const end_time = Date.parse(pretty(curr("div:nth-child(3) span").html()))
-        const obj = {
-            name: name,
-            start_time: start_time,
-            end_time: end_time,
-            status:start_time<Date.now()?"ongoing":"upcoming"
-        }
-        jsonArray.push(obj)
-    })
-    console.log(jsonArray);
-    await browser.close();
-    res.status(200).send(jsonArray)
+//     const contests = $(".schedule-row__upcoming")
+//     const jsonArray=[]
+//     contests.each((idx, ele) => {
+//         const curr = cheerio.load(ele)
+//         const name = pretty(curr("div:nth-child(1) span").html())
+//         const start_time = Date.parse(pretty(curr("div:nth-child(2) span").html()))
+//         const end_time = Date.parse(pretty(curr("div:nth-child(3) span").html()))
+//         const obj = {
+//             name: name,
+//             start_time: start_time,
+//             end_time: end_time,
+//             status:start_time<Date.now()?"ongoing":"upcoming"
+//         }
+//         jsonArray.push(obj)
+//     })
+//     console.log(jsonArray);
+//     await browser.close();
+//     res.status(200).send(jsonArray)
 
-    //using nightmarejs
-    // const nightmare = Nightmare({ show: false });
+//     //using nightmarejs
+//     // const nightmare = Nightmare({ show: false });
 
-    // const jsonArray=[]
-    // await nightmare
-    //   .goto('https://codingcompetitions.withgoogle.com/kickstart/schedule')
-    //   .wait('.schedule-row__upcoming')
-    //   .evaluate(() => {
-    //     return document.body.innerHTML;
-    //   })
-    //   .end()
-    //     .then(htmlpage => {
-    //       console.log("got");
-    //     const $=cheerio.load(htmlpage)
+//     // const jsonArray=[]
+//     // await nightmare
+//     //   .goto('https://codingcompetitions.withgoogle.com/kickstart/schedule')
+//     //   .wait('.schedule-row__upcoming')
+//     //   .evaluate(() => {
+//     //     return document.body.innerHTML;
+//     //   })
+//     //   .end()
+//     //     .then(htmlpage => {
+//     //       console.log("got");
+//     //     const $=cheerio.load(htmlpage)
     
-    //     const contests = $(".schedule-row__upcoming")
-    //     contests.each((idx, ele) => {
-    //         const curr = cheerio.load(ele)
-    //         const name = pretty(curr("div:nth-child(1) span").html())
-    //         const start_time = Date.parse(pretty(curr("div:nth-child(2) span").html()))
-    //         const end_time = Date.parse(pretty(curr("div:nth-child(3) span").html()))
-    //         const obj = {
-    //             name: name,
-    //             start_time: start_time,
-    //             end_time: end_time,
-    //             status:start_time<Date.now()?"ongoing":"upcoming"
-    //         }
-    //         jsonArray.push(obj)
-    //     })
-    // });
-    // res.status(200).send(jsonArray)
-}
+//     //     const contests = $(".schedule-row__upcoming")
+//     //     contests.each((idx, ele) => {
+//     //         const curr = cheerio.load(ele)
+//     //         const name = pretty(curr("div:nth-child(1) span").html())
+//     //         const start_time = Date.parse(pretty(curr("div:nth-child(2) span").html()))
+//     //         const end_time = Date.parse(pretty(curr("div:nth-child(3) span").html()))
+//     //         const obj = {
+//     //             name: name,
+//     //             start_time: start_time,
+//     //             end_time: end_time,
+//     //             status:start_time<Date.now()?"ongoing":"upcoming"
+//     //         }
+//     //         jsonArray.push(obj)
+//     //     })
+//     // });
+//     // res.status(200).send(jsonArray)
+// }
 
 const leetCodeSchedule = async (req,res) => {
     
@@ -376,4 +376,4 @@ const leetCodeSchedule = async (req,res) => {
 //     // res.status(200).send(jsonArray)
 
 // }
-module.exports = { atCoderSchedule, codechefSchedule, codeforcesSchedule, hackerRankSchedule, hackerEarthSchedule, kickStartSchedule,leetCodeSchedule }
+module.exports = { atCoderSchedule, codechefSchedule, codeforcesSchedule, hackerRankSchedule, hackerEarthSchedule   ,leetCodeSchedule }

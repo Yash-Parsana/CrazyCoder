@@ -25,7 +25,7 @@ const atCoderRating = async (req,res) => {
         const rt=$(".mt-2 tbody tr:nth-child(2) td span")
         const rating=pretty(rt.html())
         res.status(200).json({
-            success: true,
+            status: "success",
             rating:rating
         })
     }
@@ -51,10 +51,36 @@ const codechefRating = async (req,res) => {
         const ratingDiv = $(".user-profile-container .row .sidebar .content .rating-header .rating-number")
         const stars = $(".user-profile-container .row .sidebar .content .rating-header .rating-star")
         // const highest_rating=$(".user-profile-container .row .sidebar .content .rating-header ")
+        const rating = parseInt(pretty(ratingDiv.html()))
+        let star=1
+        if (rating >= 1400&&rating<1600)
+        {
+            star=2
+        }
+        else if (rating >= 1600&&rating<1800)
+        {
+            star=3
+        }
+        else if (rating >= 1800&&rating<2000)
+        {
+            star=4
+        }
+        else if (rating >= 2000&&rating<2200)
+        {
+            star=5
+        }
+        else if (rating >= 2200&&rating<2500)
+        {
+            star=6
+        }
+        else if (rating >= 2500)
+        {
+            star=7
+        }
         res.status(200).json({
-            success:true,
-            rating: pretty(ratingDiv.html()),
-            stars: pretty(stars.html()),
+            status: "success",
+            rating: rating,
+            stars: `${star}⭐`,
             // highest_rating:
         })
     }
@@ -117,7 +143,7 @@ const leetCodeRating = async (req, res) => {
         const pr=$("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(1) div:nth-child(1)")
         const solved=pretty(pr.html())
         res.status(200).json({
-            success:true,
+            status: "success",
             rating:solved
         })
     }
@@ -125,7 +151,7 @@ const leetCodeRating = async (req, res) => {
     {
         console.log("Error in codechef Rating Fun -> ", err);
         res.status(503).json({
-            success: false,
+            status: "failed",
             message:"Opps! Some error occurred"
         })
     }
