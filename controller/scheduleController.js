@@ -79,8 +79,6 @@ const codechefSchedule = async (req, res) => {
             const presentContest = jsonObject.present_contests
             const futureContest=jsonObject.future_contests
 
-            let utctime = Date.UTC(2023, 2, 22, 10, 0, 0)
-            console.log(utctime);
             for (let i = 0; i < presentContest.length; i++)
             {
                 const curr =presentContest[i]
@@ -109,10 +107,15 @@ const codechefSchedule = async (req, res) => {
             {
                 const curr =futureContest[i]
                 // console.log("Time : ", curr.contest_start_date);
+                const contestStartISODate = curr.contest_start_date_iso;
+                const contestEndISODate = curr.contest_end_date_iso;
+                const contestStart = new Date(contestStartISODate);
+                const contestEnd = new Date(contestEndISODate);
+                console.log(Date.parse(contestStartISODate), " - ",Date.parse(new Date(curr.contest_start_date_iso).toLocaleString("en-US", {timeZone: "UTC"})));
                 const obj = {
                     name: curr.contest_name,
-                    start_time:Date.parse(curr.contest_start_date),
-                    end_time: Date.parse(curr.contest_end_date),
+                    start_time:Date.parse(new Date(curr.contest_start_date_iso).toLocaleString("en-US", {timeZone: "UTC"})),
+                    end_time: new Date(contestEnd.getTime() + contestEnd.getTimezoneOffset() * 60 * 1000),
                     status:"upcoming"
                 }
                 jsonArray.push(obj)
