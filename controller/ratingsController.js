@@ -31,7 +31,7 @@ const atCoderRating = async (req,res) => {
     }
     catch (err)
     {
-        console.log("Error while Fetching atcoderRating -> ",err);
+        // console.log("Error while Fetching atcoderRating -> ",err);
         res.status(503).json({
             success: false,
             message:"Opps! Some error occurred"
@@ -80,13 +80,13 @@ const codechefRating = async (req,res) => {
         res.status(200).json({
             status: "success",
             rating: rating,
-            stars: `${star}⭐`,
+            stars: star,
             // highest_rating:
         })
     }
     catch (err)
     {
-        console.log("Error in codechef Rating Fun -> ", err);
+        // console.log("Error in codechef Rating Fun -> ", err);
         res.status(503).json({
             success: false,
             message:"Opps! Some error occurred"
@@ -124,7 +124,7 @@ const codeforcesRating = async (req, res) => {
         res.status(200).send(jsonArray)
     }
     else {
-        console.log("Error in fetching codeforces ratings -> ", response.error);
+        // console.log("Error in fetching codeforces ratings -> ", response.error);
         res.status(503).json({
             success: false,
             message:"Opps! Some error occurred"
@@ -140,16 +140,22 @@ const leetCodeRating = async (req, res) => {
         const {data} = await axios.get(url)
         
         const $ = cheerio.load(data)
-        const pr=$("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(1) div:nth-child(1)")
-        const solved=pretty(pr.html())
+        const total=$("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(2) div div:nth-child(1) div:nth-child(1) div:nth-child(1)")
+        const easy = $("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div div:nth-child(2) div:nth-child(1) div:nth-child(1) div:nth-child(2) span:nth-child(1)")
+        // const medium = $("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div div:nth-child(2) div:nth-child(2) div:nth-child(1) div:nth-child(2)")
+        const hard = $("body div:nth-child(1) div:nth-child(2) div div:nth-child(1) div div:nth-child(2) div:nth-child(3) div:nth-child(1) div:nth-child(2) span:nth-child(1)")
+        // console.log("Easy : ",pretty(easy.html()));
+        // console.log("Medium : ",pretty(medium.html()));
+        // console.log("Hard : ",pretty(hard.html()));
+        const solved=pretty(total.html())
         res.status(200).json({
             status: "success",
-            totalSolved:solved
+            totalSolved: solved,
         })
     }
     catch (err)
     {
-        console.log("Error in codechef Rating Fun -> ", err);
+        // console.log("Error in codechef Rating Fun -> ", err);
         res.status(503).json({
             status: "failed",
             message:"Opps! Some error occurred"
