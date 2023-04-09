@@ -12,6 +12,6 @@ app.use('/ranking',ratingRouter)
 app.get('/', () => {
     console.log("You are in default Root");
 })
-app.listen(3000, () => {
+app.listen(80, () => {
     console.log("Server is Runnig on Port : ",80);
 })
