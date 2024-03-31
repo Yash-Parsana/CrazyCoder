@@ -1,6 +1,8 @@
 const express = require('express');
+const cors =require('cors')
 
 const app = express();
+app.use(cors());
 
 const scheduleRouter = require('./router/scheduleRoute');
 const ratingRouter = require('./router/ratingRouter');
