@@ -86,7 +86,7 @@ const codechefRating = async (req,res) => {
     }
     catch (err)
     {
-        // console.log("Error in codechef Rating Fun -> ", err);
+        console.log("Error in codechef Rating Fun -> ", err);
         res.status(503).json({
             success: false,
             message:"Opps! Some error occurred"
