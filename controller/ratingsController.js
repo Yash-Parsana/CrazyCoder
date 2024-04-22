@@ -124,7 +124,7 @@ const codeforcesRating = async (req, res) => {
         res.status(200).send(jsonArray)
     }
     else {
-        // console.log("Error in fetching codeforces ratings -> ", response.error);
+        console.log("Error in fetching codeforces ratings -> ", response.error);
         res.status(503).json({
             success: false,
             message:"Opps! Some error occurred"
